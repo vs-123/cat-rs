@@ -46,18 +46,6 @@ jobs:
             architecture: i586
             binary-postfix: ".exe"
             use-cross: false
-          - os: ubuntu-latest
-            os-name: linux
-            target: aarch64-unknown-linux-gnu
-            architecture: arm64
-            binary-postfix: ""
-            use-cross: false
-          - os: ubuntu-latest
-            os-name: linux
-            target: i686-unknown-linux-gnu
-            architecture: i686
-            binary-postfix: ""
-            use-cross: false
     steps:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
@@ -94,7 +82,7 @@ jobs:
         run: |
           cd target/${{ matrix.job.target }}/release
           ####### reduce binary size by removing debug symbols #######
-          BINARY_NAME=cat-rs${{ matrix.job.binary-postfix }}
+          BINARY_NAME=cat${{ matrix.job.binary-postfix }}
           if [[ ${{ matrix.job.target }} == aarch64-unknown-linux-gnu ]]; then
             GCC_PREFIX="aarch64-linux-gnu-"
           else
